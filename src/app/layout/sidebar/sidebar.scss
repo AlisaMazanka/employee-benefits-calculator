@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  height: 100%;
+  background-color: #1e293b;
+  color: #e2e8f0;
+  padding: 16px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* hover */
+.sidebar-nav a:hover {
+  background-color: #334155;
+}
+
+/* active link */
+.sidebar-nav a.active {
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-weight: 500;
+}

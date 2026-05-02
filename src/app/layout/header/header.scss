@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+.header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* left side */
+.header__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* right side (placeholder for future) */
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
