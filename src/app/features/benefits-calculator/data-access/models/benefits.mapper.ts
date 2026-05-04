@@ -6,8 +6,8 @@ export function mapBenefitsDtoToFormModel(dto: EmployeeBenefitsDto): EmployeeBen
     employee: {
       firstName: dto.employee.firstName,
       lastName: dto.employee.lastName,
-      dateOfBirth: toDate(dto.employee.dateOfBirth),
-      employmentStartDate: toDate(dto.employee.employmentStartDate),
+      dateOfBirth: dto.employee.dateOfBirth,
+      employmentStartDate: dto.employee.employmentStartDate,
     },
     compensation: {
       annualSalary: dto.compensation.annualSalary,
@@ -16,15 +16,15 @@ export function mapBenefitsDtoToFormModel(dto: EmployeeBenefitsDto): EmployeeBen
     },
     serviceHistory: dto.serviceHistory.map((item) => ({
       id: item.id,
-      startDate: toDate(item.startDate),
-      endDate: toDate(item.endDate),
+      startDate: item.startDate,
+      endDate: item.endDate,
       isCurrent: item.isCurrent,
       serviceType: item.serviceType,
     })),
     calculationSettings: {
       mode: dto.calculationSettings.mode,
       targetAge: dto.calculationSettings.targetAge,
-      targetDate: toDate(dto.calculationSettings.targetDate),
+      targetDate: dto.calculationSettings.targetDate,
     },
   };
 }
@@ -35,8 +35,8 @@ export function mapBenefitsFormModelToDto(id: string, form: EmployeeBenefitsForm
         employee: {
             firstName: form.employee.firstName,
             lastName: form.employee.firstName,
-            dateOfBirth: toIsoDate(form.employee.dateOfBirth),
-            employmentStartDate: toIsoDate(form.employee.employmentStartDate)
+            dateOfBirth: form.employee.dateOfBirth,
+            employmentStartDate: form.employee.employmentStartDate
         },
         compensation: {
             annualSalary: form.compensation.annualSalary ?? 0,
@@ -45,8 +45,8 @@ export function mapBenefitsFormModelToDto(id: string, form: EmployeeBenefitsForm
         },
         serviceHistory: form.serviceHistory.map((item) => ({
             id: item.id,
-            startDate: toIsoDate(item.startDate),
-            endDate: item.endDate ? toIsoDate(item.endDate) : null,
+            startDate: item.startDate,
+            endDate: item.endDate,
             isCurrent: item.isCurrent,
             serviceType: item.serviceType
         })
@@ -55,15 +55,7 @@ export function mapBenefitsFormModelToDto(id: string, form: EmployeeBenefitsForm
         calculationSettings: {
             mode: form.calculationSettings.mode,
             targetAge: form.calculationSettings.targetAge,
-            targetDate: form.calculationSettings.targetDate ? toIsoDate(form.calculationSettings.targetDate) : null,
+            targetDate: form.calculationSettings.targetDate,
         }
     }
-}
-
-function toDate(value: string | null): Date | null {
-  return value ? new Date(value) : null;
-}
-
-function toIsoDate(value: Date | null): string {
-  return value ? value.toISOString().slice(0, 10) : '';
 }

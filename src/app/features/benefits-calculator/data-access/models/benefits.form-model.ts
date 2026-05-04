@@ -2,8 +2,8 @@ export interface EmployeeBenefitsFormModel {
   employee: {
     firstName: string;
     lastName: string;
-    dateOfBirth: Date | null;
-    employmentStartDate: Date | null;
+    dateOfBirth: string | null;
+    employmentStartDate: string | null;
   };
 
   compensation: {
@@ -17,14 +17,14 @@ export interface EmployeeBenefitsFormModel {
   calculationSettings: {
     mode: 'current' | 'by-age' | 'by-date';
     targetAge: number | null;
-    targetDate: Date | null;
+    targetDate: string | null;
   };
 }
 
 export interface ServiceHistoryFormModel {
   id: string;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: string | null;
+  endDate: string | null;
   isCurrent: boolean;
   serviceType: 'full-time' | 'part-time' | 'leave';
 }

@@ -3,7 +3,7 @@ import { CompensationFormGroup } from './compensation.form-group';
 import { EmployeeDetailsFormGroup } from './employee-details.form-group';
 import { ServiceHistoryItemFormGroup } from './service-history-item.form-group';
 import { CalculationSettingsFormGroup } from './calculation-settings.form-group';
-import { EmployeeBenefitsFormModel } from '../data-access/models/benefits.form-model';
+import { EmployeeBenefitsFormModel } from '../../data-access/models/benefits.form-model';
 
 export interface BenefitsCalculatorFormControls {
   employee: EmployeeDetailsFormGroup;

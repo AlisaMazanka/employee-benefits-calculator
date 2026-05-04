@@ -9,8 +9,8 @@ export interface EmployeeBenefitsDto {
 export interface EmployeeDto {
   firstName: string;
   lastName: string;
-  dateOfBirth: string;
-  employmentStartDate: string;
+  dateOfBirth: string | null;
+  employmentStartDate: string | null;
 }
 
 export interface CompensationDto {
@@ -21,7 +21,7 @@ export interface CompensationDto {
 
 export interface ServiceHistoryItemDto {
   id: string;
-  startDate: string;
+  startDate: string | null;
   endDate: string | null;
   isCurrent: boolean;
   serviceType: 'full-time' | 'part-time' | 'leave';

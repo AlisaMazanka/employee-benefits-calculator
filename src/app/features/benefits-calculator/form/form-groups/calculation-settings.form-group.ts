@@ -5,7 +5,7 @@ export type CalculationMode = 'current' | 'by-age' | 'by-date';
 export interface CalculationSettingsFormControls {
   mode: FormControl<CalculationMode>;
   targetAge: FormControl<number | null>;
-  targetDate: FormControl<Date | null>;
+  targetDate: FormControl<string | null>;
 }
 
 export class CalculationSettingsFormGroup extends FormGroup<CalculationSettingsFormControls> {
@@ -13,7 +13,7 @@ export class CalculationSettingsFormGroup extends FormGroup<CalculationSettingsF
     const form = new CalculationSettingsFormGroup({
       mode: new FormControl<CalculationMode>('current', { nonNullable: true }),
       targetAge: new FormControl<number | null>({ value: null, disabled: true }),
-      targetDate: new FormControl<Date | null>({ value: null, disabled: true }),
+      targetDate: new FormControl<string | null>({ value: null, disabled: true }),
     });
 
     form.syncControlsWithMode();
@@ -29,7 +29,7 @@ export class CalculationSettingsFormGroup extends FormGroup<CalculationSettingsF
       this.controls.targetAge.setValidators([Validators.required]);
       this.controls.targetDate.disable();
       this.controls.targetDate.clearValidators();
-      this.controls.targetDate.setValue(null);
+      this.controls.targetDate.setValue('');
     }
 
     if (mode === 'by-date') {

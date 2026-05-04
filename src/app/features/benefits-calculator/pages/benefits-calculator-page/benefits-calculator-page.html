@@ -1,2 +1,166 @@
 <h2>Benefits Calculator</h2>
-<pre>{{ formValue() | json }}</pre>
+<form [formGroup]="formGroup" class="benefits-form">
+    <section formGroupName="employee" class="form-section">
+        <h3>Employee details</h3>
+        <div class="form-grid">
+            <label>
+                First name
+                <input type="text" formControlName="firstName" />
+            </label>
+            <label>
+                Last name
+                <input type="text" formControlName="lastName" />
+            </label>
+            <label>
+                Date of birth
+                <input type="date" formControlName="dateOfBirth" />
+            </label>
+            <label>
+                Employment start date
+                <input type="date" formControlName="employmentStartDate" />
+            </label>
+        </div>
+    </section>
+    <section formGroupName="compensation" class="form-section">
+        <h3>Compensation details</h3>
+        <div class="form-grid">
+            <label>
+                Annual Salary
+                <input type="number" formControlName="annualSalary" />
+            </label>
+            <label>
+                Bonus Percentage
+                <input type="number" formControlName="bonusPercentage" />
+            </label>
+            <label>
+                Pension Contribution Percentage
+                <input type="number" formControlName="pensionContributionPercentage" />
+            </label>
+        </div>
+    </section>
+    <section class="form-section">
+        <h3>Service history</h3>
+        <div formArrayName="serviceHistory">
+            @for (group of form.serviceHistoryArray.controls; track group; let i = $index) {
+            <div [formGroupName]="i" class="service-row">
+                <div class="form-grid">
+                    <label>
+                        Start date
+                        <input type="date" formControlName="startDate" />
+                    </label>
+
+                    <label>
+                        End date
+                        <input type="date" formControlName="endDate" />
+                        @if (group.errors?.['endDateBeforeStartDate']) {
+                        <div class="form-error">
+                            End date must be after start date
+                        </div>
+                        }
+                    </label>
+                    <label>
+                        Is current
+                        <input type="checkbox" formControlName="isCurrent" />
+                    </label>
+                    <label>
+                        Service type
+                        <select formControlName="serviceType">
+                            <option value="full-time">Full time</option>
+                            <option value="part-time">Part time</option>
+                            <option value="leave">Leave</option>
+                        </select>
+                    </label>
+                </div>
+                <button type="button" (click)="removeServiceHistoryItem(i)">
+                    Remove
+                </button>
+            </div>
+            }
+            <button type="button" (click)="addServiceHistoryItem()">
+                + Add service
+            </button>
+        </div>
+
+    </section>
+    <section formGroupName="calculationSettings" class="form-section">
+        <h3>Calculation settings</h3>
+        <div class="form-grid">
+            <label>
+                Mode
+                <select formControlName="mode">
+                    <option value="current">Current calculation</option>
+                    <option value="by-age">Calculation by age</option>
+                    <option value="by-date">Calculation by date</option>
+                </select>
+            </label>
+            <label>
+                Target Age
+                <input type="number" formControlName="targetAge" />
+            </label>
+            <label>
+                Target Date
+                <input type="date" formControlName="targetDate" />
+            </label>
+        </div>
+    </section>
+</form>
+
+@if (loading()) {
+<div class="status-message status-message--info">
+    Loading benefits data...
+</div>
+}
+
+@if (saved()) {
+<div class="status-message status-message--success">
+    Changes saved successfully.
+</div>
+}
+
+@if (error()) {
+<div class="status-message status-message--error">
+    {{ error() }}
+</div>
+}
+
+<div class="form-actions">
+    <button type="button" (click)="onCalculate()" [disabled]="calculating() || saving()">
+        {{ calculating() ? 'Calculating...' : 'Calculate' }}
+    </button>
+
+    <button type="button" (click)="onSave()" [disabled]="saving() || calculating()">
+        {{ saving() ? 'Saving...' : 'Save' }}
+    </button>
+</div>
+
+<div class="benefits-form">
+    @if (calculationResult(); as result) {
+    <section class="summary-panel">
+        <div class="summary-panel__header">
+            <h3>Calculation summary</h3>
+            <span>Based on the current form values</span>
+        </div>
+
+        <div class="summary-cards">
+            <div class="summary-field">
+                <label>Total service</label>
+                <div class="summary-value">{{ result.totalServiceYears }} years</div>
+            </div>
+
+            <div class="summary-field">
+                <label>Eligibility</label>
+                <div class="summary-value">
+                    {{ result.eligible ? 'Eligible' : 'Not eligible' }}
+                </div>
+            </div>
+
+            <div class="summary-field">
+                <label>Estimated annual benefit</label>
+                <div class="summary-value">
+                    {{ result.estimatedAnnualBenefit | number: '1.0-0' }}
+                </div>
+            </div>
+        </div>
+    </section>
+    }
+</div>
