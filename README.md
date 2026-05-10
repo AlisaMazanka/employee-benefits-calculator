@@ -30,7 +30,7 @@ The focus is not on visual complexity, but on clean architecture, maintainable f
 
 Tech Stack
 
-* Angular 19/20
+* Angular 21 (standalone architecture)
 * Standalone components
 * Angular Router
 * Typed reactive forms
