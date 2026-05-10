@@ -1,2 +1,32 @@
-<h2>Activity Log</h2>
-<p>Recent calculation and save actions will be displayed here.</p>
+<section class="activity-log">
+  <div class="activity-log__header">
+    <h2>Activity Log</h2>
+
+    <p>
+      Recent actions and calculation events from the Employee Benefits
+      Calculator.
+    </p>
+  </div>
+
+  <div class="activity-log__list">
+    @for (log of logs; track log.timestamp) {
+      <div class="activity-log__item">
+        <div class="activity-log__content">
+          <strong>{{ log.action }}</strong>
+
+          <span>
+            {{ log.timestamp | date: 'dd.MM.yyyy HH:mm' }}
+          </span>
+        </div>
+
+        <div
+          class="activity-log__status"
+          [class.activity-log__status--success]="log.status === 'success'"
+          [class.activity-log__status--error]="log.status === 'error'"
+        >
+          {{ log.status }}
+        </div>
+      </div>
+    }
+  </div>
+</section>
