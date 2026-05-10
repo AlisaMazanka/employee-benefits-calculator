@@ -1,59 +1,211 @@
-# EmployeeBenefitsCalculator
+Employee Benefits Calculator
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.9.
+A fictional enterprise-style Angular application for calculating employee benefit eligibility and estimated annual benefits.
 
-## Development server
+This project was built as a portfolio demo to showcase modern Angular development practices, clean feature architecture, typed reactive forms, and separation of concerns.
 
-To start a local development server, run:
+⸻
 
-```bash
-ng serve
-```
+Overview
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Employee Benefits Calculator allows users to:
 
-## Code scaffolding
+* view employee details
+* manage compensation data
+* edit service history
+* calculate benefit eligibility
+* estimate annual benefit amount
+* save calculation data through a mocked API flow
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+The business domain is fictional and does not contain any proprietary logic or real client data.
 
-```bash
-ng generate component component-name
-```
+⸻
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Why this project
 
-```bash
-ng generate --help
-```
+This project was created to demonstrate hands-on Angular skills in a realistic enterprise-style application.
+The focus is not on visual complexity, but on clean architecture, maintainable form structure, typed forms, clear data flow, and testable business logic.
 
-## Building
+⸻
 
-To build the project run:
+Tech Stack
 
-```bash
-ng build
-```
+* Angular 19/20
+* Standalone components
+* Angular Router
+* Typed reactive forms
+* Signals
+* SCSS
+* HttpClient
+* HttpInterceptor
+* Mock API
+* Strict TypeScript
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+⸻
 
-## Running unit tests
+Architecture
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+The project follows a feature-based structure:
 
-```bash
-ng test
-```
+src/app/
+  core/
+  shared/
+  features/
+    benefits-calculator/
+      components/
+      data-access/
+      domain/
+      forms/
+      pages/
 
-## Running end-to-end tests
+Main architectural layers
 
-For end-to-end (e2e) testing, run:
+Data Access
 
-```bash
-ng e2e
-```
+Responsible for API communication and DTO contracts.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Includes:
+* BenefitsApiService
+* DTO models
+* mock data
+* MockApiInterceptor
 
-## Additional Resources
+⸻
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Forms
+
+Responsible for form creation, form state, form models, custom FormGroups, validators, and form mapping.
+
+Includes:
+* BenefitsCalculatorFormGroup
+* EmployeeDetailsFormGroup
+* CompensationFormGroup
+* CalculationSettingsFormGroup
+* ServiceHistoryItemFormGroup
+* BenefitsFormService
+* validators
+
+⸻
+
+Domain
+
+Responsible for business logic that does not belong to UI, API, or form structure.
+
+Includes:
+* BenefitsCalculationService
+
+⸻
+
+Facade
+
+Responsible for orchestration between UI, forms, API, and domain logic.
+
+Includes:
+* loading state
+* saving state
+* calculating state
+* error state
+* calculation result state
+
+⸻
+
+Form Architecture
+
+The application uses typed reactive forms with custom FormGroup classes.
+
+The form structure is separated from DTO models:
+DTO → FormModel → FormGroup
+FormGroup → FormModel → DTO
+
+This keeps API contracts independent from UI form state.
+
+Examples of implemented form logic:
+
+* dynamic FormArray for service history
+* isCurrent disables and clears endDate
+* calculation mode controls required fields dynamically
+* cross-field validation for service date ranges
+* disabled Save / Calculate buttons when the form is invalid
+
+⸻
+
+Data Flow
+
+User
+  ↓
+Reactive Form
+  ↓
+BenefitsFormFacade
+  ↓
+BenefitsFormService
+  ↓
+Mapper
+  ↓
+BenefitsApiService
+  ↓
+MockApiInterceptor
+  ↓
+Response
+  ↓
+Facade state
+  ↓
+UI
+
+⸻
+
+Features
+
+* Dashboard page
+* Benefits Calculator page
+* Activity Log page
+* AppShell layout with sidebar navigation
+* Typed reactive form
+* Dynamic service history rows
+* Calculation summary
+* Mock API through HttpInterceptor
+* Loading, saving, success, and error states
+
+⸻
+
+Testing
+
+Testing is planned for the core logic layer.
+The intended test scope includes:
+
+* calculation service tests
+* validator tests
+* mapper tests
+
+The goal is not full test coverage, but meaningful coverage of core business logic.
+
+⸻
+
+How to Run
+
+Install dependencies:
+npm install
+
+Start the development server:
+npm start
+
+Then open:
+http://localhost:4200
+
+⸻
+
+Demo
+
+Live demo link will be added after deployment.
+
+⸻
+
+Screenshots
+
+Screenshots will be added after deployment.
+
+⸻
+
+Disclaimer
+
+This is a fictional demo project created for portfolio purposes.
+It does not contain proprietary code, real business rules, real employee data, or UI copied from any commercial product.
