@@ -28,11 +28,18 @@ export class BenefitsCalculatorFormGroup extends FormGroup<BenefitsCalculatorFor
     return this.controls.serviceHistory;
   }
 
+  get canRemoveServiceHistoryItem(): boolean {
+    return this.serviceHistoryArray.length > 1;
+  }
+
   addServiceHistoryItem(): void {
     this.serviceHistoryArray.push(ServiceHistoryItemFormGroup.create());
   }
 
   removeServiceHistoryItem(index: number): void {
+    if(!this.canRemoveServiceHistoryItem) {
+      return;
+    }
     this.serviceHistoryArray.removeAt(index);
   }
 

@@ -1,0 +1,60 @@
+<section class="form-section" [formGroup]="formGroup">
+    <h3>Service history</h3>
+
+    <div formArrayName="serviceHistory">
+        @for (group of form().serviceHistoryArray.controls; track group; let i = $index) {
+        <div [formGroupName]="i" class="service-row">
+            <div class="service-row__header">
+                <h4>Service period {{ i + 1 }}</h4>
+            </div>
+
+            <div class="form-grid">
+                <label>
+                    <span class="required-label">Start date</span>
+                    <input type="date" formControlName="startDate" />
+                    @if (isControlInvalid(group.controls.startDate)) {
+                    <div class="form-error">
+                        Start date is required
+                    </div>
+                    }
+                </label>
+                <label>
+                    End date
+                    <input type="date" formControlName="endDate" />
+                    @if (group.isDateRangeInvalid) {
+                    <div class="form-error">
+                        End date must be after start date
+                    </div>
+                    }
+                </label>
+                <label>
+                    Is current
+                    <input type="checkbox" formControlName="isCurrent" />
+                </label>
+
+                <label>
+                    <span class="required-label">Service type</span>
+                    <select formControlName="serviceType">
+                        <option value="full-time">Full time</option>
+                        <option value="part-time">Part time</option>
+                        <option value="leave">Leave</option>
+                    </select>
+                    @if (isControlInvalid(group.controls.serviceType)) {
+                    <div class="form-error">
+                        Service type is required
+                    </div>
+                    }
+                </label>
+            </div>
+
+            <button type="button" (click)="removeService.emit(i)" [disabled]="!form().canRemoveServiceHistoryItem">
+                Remove
+            </button>
+        </div>
+        }
+    </div>
+
+    <button type="button" (click)="addService.emit()">
+        + Add service
+    </button>
+</section>

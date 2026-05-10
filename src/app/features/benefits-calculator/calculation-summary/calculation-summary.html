@@ -1,0 +1,31 @@
+<div class="benefits-form">
+    @if (result(); as result) {
+    <section class="summary-panel">
+        <div class="summary-panel__header">
+            <h3>Calculation summary</h3>
+            <span>Based on the current form values</span>
+        </div>
+
+        <div class="summary-cards">
+            <div class="summary-field">
+                <label>Total service</label>
+                <div class="summary-value">{{ result.totalServiceYears }} years</div>
+            </div>
+
+            <div class="summary-field">
+                <label>Eligibility</label>
+                <div class="summary-value">
+                    {{ result.eligible ? 'Eligible' : 'Not eligible' }}
+                </div>
+            </div>
+
+            <div class="summary-field">
+                <label>Estimated annual benefit</label>
+                <div class="summary-value">
+                    {{ result.estimatedAnnualBenefit | number: '1.0-0' }}
+                </div>
+            </div>
+        </div>
+    </section>
+    }
+</div>

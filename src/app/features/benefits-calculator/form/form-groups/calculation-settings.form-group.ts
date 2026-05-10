@@ -16,40 +16,48 @@ export class CalculationSettingsFormGroup extends FormGroup<CalculationSettingsF
       targetDate: new FormControl<string | null>({ value: null, disabled: true }),
     });
 
+    form.initModeChanges();
     form.syncControlsWithMode();
 
     return form;
   }
 
+  initModeChanges(): void {
+    this.controls.mode.valueChanges.subscribe(() => {
+      this.syncControlsWithMode();
+    });
+  }
+
   syncControlsWithMode(): void {
     const mode = this.controls.mode.value;
 
+    const targetAge = this.controls.targetAge;
+    const targetDate = this.controls.targetDate;
+
+    targetAge.clearValidators();
+    targetDate.clearValidators();
+
     if (mode === 'by-age') {
-      this.controls.targetAge.enable();
-      this.controls.targetAge.setValidators([Validators.required]);
-      this.controls.targetDate.disable();
-      this.controls.targetDate.clearValidators();
-      this.controls.targetDate.setValue('');
+      targetAge.enable();
+      targetAge.setValidators([Validators.required]);
+
+      targetDate.disable();
+      targetDate.reset();
+    } else if (mode === 'by-date') {
+      targetDate.enable();
+      targetDate.setValidators([Validators.required]);
+
+      targetAge.disable();
+      targetAge.reset();
+    } else {
+      targetAge.disable();
+      targetDate.disable();
+
+      targetAge.reset();
+      targetDate.reset();
     }
 
-    if (mode === 'by-date') {
-      this.controls.targetDate.enable();
-      this.controls.targetDate.setValidators([Validators.required]);
-      this.controls.targetAge.disable();
-      this.controls.targetAge.clearValidators();
-      this.controls.targetAge.setValue(null);
-    }
-
-    if (mode === 'current') {
-      this.controls.targetAge.disable();
-      this.controls.targetAge.clearValidators();
-      this.controls.targetAge.setValue(null);
-      this.controls.targetDate.disable();
-      this.controls.targetDate.clearValidators();
-      this.controls.targetDate.setValue(null);
-    }
-
-    this.controls.targetAge.updateValueAndValidity();
-    this.controls.targetDate.updateValueAndValidity();
+    targetAge.updateValueAndValidity();
+    targetDate.updateValueAndValidity();
   }
 }

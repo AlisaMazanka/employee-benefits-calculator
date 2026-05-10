@@ -4,20 +4,32 @@
         <h3>Employee details</h3>
         <div class="form-grid">
             <label>
-                First name
+                <span class="required-label">First name</span>
                 <input type="text" formControlName="firstName" />
+                @if (isControlInvalid(form.controls.employee.controls.firstName)) {
+                <div class="form-error">First name is required</div>
+                }
             </label>
             <label>
-                Last name
+                <span class="required-label">Last name</span>
                 <input type="text" formControlName="lastName" />
+                @if (isControlInvalid(form.controls.employee.controls.lastName)) {
+                <div class="form-error">Last name is required</div>
+                }
             </label>
             <label>
-                Date of birth
+                <span class="required-label">Date of birth</span>
                 <input type="date" formControlName="dateOfBirth" />
+                @if (isControlInvalid(form.controls.employee.controls.dateOfBirth)) {
+                <div class="form-error">Date of birth is required</div>
+                }
             </label>
             <label>
-                Employment start date
+                <span class="required-label">Employment start date</span>
                 <input type="date" formControlName="employmentStartDate" />
+                @if (isControlInvalid(form.controls.employee.controls.employmentStartDate)) {
+                <div class="form-error">Employment start date is required</div>
+                }
             </label>
         </div>
     </section>
@@ -25,8 +37,11 @@
         <h3>Compensation details</h3>
         <div class="form-grid">
             <label>
-                Annual Salary
+                <span class="required-label">Annual Salary</span>
                 <input type="number" formControlName="annualSalary" />
+                @if (isControlInvalid(form.controls.compensation.controls.annualSalary)) {
+                <div class="form-error">Annual salary is required</div>
+                }
             </label>
             <label>
                 Bonus Percentage
@@ -38,50 +53,10 @@
             </label>
         </div>
     </section>
-    <section class="form-section">
-        <h3>Service history</h3>
-        <div formArrayName="serviceHistory">
-            @for (group of form.serviceHistoryArray.controls; track group; let i = $index) {
-            <div [formGroupName]="i" class="service-row">
-                <div class="form-grid">
-                    <label>
-                        Start date
-                        <input type="date" formControlName="startDate" />
-                    </label>
 
-                    <label>
-                        End date
-                        <input type="date" formControlName="endDate" />
-                        @if (group.errors?.['endDateBeforeStartDate']) {
-                        <div class="form-error">
-                            End date must be after start date
-                        </div>
-                        }
-                    </label>
-                    <label>
-                        Is current
-                        <input type="checkbox" formControlName="isCurrent" />
-                    </label>
-                    <label>
-                        Service type
-                        <select formControlName="serviceType">
-                            <option value="full-time">Full time</option>
-                            <option value="part-time">Part time</option>
-                            <option value="leave">Leave</option>
-                        </select>
-                    </label>
-                </div>
-                <button type="button" (click)="removeServiceHistoryItem(i)">
-                    Remove
-                </button>
-            </div>
-            }
-            <button type="button" (click)="addServiceHistoryItem()">
-                + Add service
-            </button>
-        </div>
+    <app-service-history-section [form]="form" (addService)="addServiceHistoryItem()"
+        (removeService)="removeServiceHistoryItem($event)"></app-service-history-section>
 
-    </section>
     <section formGroupName="calculationSettings" class="form-section">
         <h3>Calculation settings</h3>
         <div class="form-grid">
@@ -96,10 +71,20 @@
             <label>
                 Target Age
                 <input type="number" formControlName="targetAge" />
+                @if (isControlInvalid(form.controls.calculationSettings.controls.targetAge)) {
+                <div class="form-error">
+                    Target age is required
+                </div>
+                }
             </label>
             <label>
                 Target Date
                 <input type="date" formControlName="targetDate" />
+                @if (isControlInvalid(form.controls.calculationSettings.controls.targetDate)) {
+                <div class="form-error">
+                    Target date is required
+                </div>
+                }
             </label>
         </div>
     </section>
@@ -124,43 +109,13 @@
 }
 
 <div class="form-actions">
-    <button type="button" (click)="onCalculate()" [disabled]="calculating() || saving()">
+    <button type="button" (click)="onCalculate()" [disabled]="form.invalid ||calculating() || saving()">
         {{ calculating() ? 'Calculating...' : 'Calculate' }}
     </button>
 
-    <button type="button" (click)="onSave()" [disabled]="saving() || calculating()">
+    <button type="button" (click)="onSave()" [disabled]="form.invalid ||saving() || calculating()">
         {{ saving() ? 'Saving...' : 'Save' }}
     </button>
 </div>
 
-<div class="benefits-form">
-    @if (calculationResult(); as result) {
-    <section class="summary-panel">
-        <div class="summary-panel__header">
-            <h3>Calculation summary</h3>
-            <span>Based on the current form values</span>
-        </div>
-
-        <div class="summary-cards">
-            <div class="summary-field">
-                <label>Total service</label>
-                <div class="summary-value">{{ result.totalServiceYears }} years</div>
-            </div>
-
-            <div class="summary-field">
-                <label>Eligibility</label>
-                <div class="summary-value">
-                    {{ result.eligible ? 'Eligible' : 'Not eligible' }}
-                </div>
-            </div>
-
-            <div class="summary-field">
-                <label>Estimated annual benefit</label>
-                <div class="summary-value">
-                    {{ result.estimatedAnnualBenefit | number: '1.0-0' }}
-                </div>
-            </div>
-        </div>
-    </section>
-    }
-</div>
+<app-calculation-summary [result]="calculationResult()" />

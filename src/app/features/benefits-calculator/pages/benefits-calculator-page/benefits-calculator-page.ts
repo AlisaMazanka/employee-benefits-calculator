@@ -1,18 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { BenefitsApiService } from '../../data-access/services/benefits-api';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { isControlInvalid } from '../../../../shared/utils/form-control-state.util';
 import { BenefitsFormFacade } from '../../form/facade/benefits-form.facade';
-import { DecimalPipe } from '@angular/common';
+import { ServiceHistorySection } from '../../components/service-history-section/service-history-section';
+import { CalculationSummary } from '../../calculation-summary/calculation-summary';
 
 @Component({
   selector: 'app-benefits-calculator-page',
-  imports: [ReactiveFormsModule, DecimalPipe],
+  imports: [ReactiveFormsModule, ServiceHistorySection, CalculationSummary],
   templateUrl: './benefits-calculator-page.html',
   styleUrl: './benefits-calculator-page.scss',
 })
 export class BenefitsCalculatorPage implements OnInit {
-  private readonly benefitsApiService = inject(BenefitsApiService);
   private readonly facade = inject(BenefitsFormFacade);
 
   form = this.facade.form;
