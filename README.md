@@ -195,7 +195,7 @@ http://localhost:4200
 
 Demo
 
-Live demo link will be added after deployment.
+[Live demo link will be added after deployment.](https://employee-benefits-calculator.vercel.app/dashboard)
 
 ⸻
 
