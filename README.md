@@ -195,13 +195,24 @@ http://localhost:4200
 
 Demo
 
-[Live demo link will be added after deployment.](https://employee-benefits-calculator.vercel.app/dashboard)
+[Live Demo](https://employee-benefits-calculator.vercel.app/dashboard)
 
 ⸻
 
 Screenshots
 
-Screenshots will be added after deployment.
+## Dashboard
+
+![Dashboard](docs/screenshots/dashboard.png)
+
+## Benefits Calculator
+
+![Calculator Form](docs/screenshots/calculator-form.png)
+![Calculation Summary](docs/screenshots/calculator-summary.png)
+
+## Activity Log
+
+![Activity Log](docs/screenshots/activity-log.png)
 
 ⸻
 
