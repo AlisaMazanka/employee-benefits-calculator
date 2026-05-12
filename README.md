@@ -167,16 +167,29 @@ Features
 
 ⸻
 
-Testing
+# Testing
 
-Testing is planned for the core logic layer.
-The intended test scope includes:
+The project includes focused unit tests for the core logic layer.
 
-* calculation service tests
-* validator tests
-* mapper tests
+Current test coverage includes:
 
-The goal is not full test coverage, but meaningful coverage of core business logic.
+- `BenefitsCalculationService`
+  - total service years calculation
+  - eligibility rules
+  - estimated annual benefit calculation
+  - empty service history edge case
+
+- Service history validators
+  - valid date ranges
+  - invalid date ranges
+  - current service period handling
+
+- Benefits mapper
+  - DTO → FormModel mapping
+  - FormModel → DTO mapping
+  - default values for nullable compensation fields
+
+The goal is not full coverage, but meaningful coverage of the logic that carries business value.
 
 ⸻
 

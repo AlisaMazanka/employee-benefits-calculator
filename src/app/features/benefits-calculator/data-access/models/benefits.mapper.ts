@@ -34,7 +34,7 @@ export function mapBenefitsFormModelToDto(id: string, form: EmployeeBenefitsForm
         id,
         employee: {
             firstName: form.employee.firstName,
-            lastName: form.employee.firstName,
+            lastName: form.employee.lastName,
             dateOfBirth: form.employee.dateOfBirth,
             employmentStartDate: form.employee.employmentStartDate
         },
