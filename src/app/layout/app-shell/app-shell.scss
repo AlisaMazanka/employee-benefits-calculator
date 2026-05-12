@@ -8,14 +8,12 @@
   height: 100vh;
 }
 
-/* Sidebar */
 app-sidebar {
   width: 220px;
   min-width: 220px;
   border-right: 1px solid #e5e7eb;
 }
 
-/* Content area */
 .app-shell__content {
   flex: 1;
   display: flex;
@@ -23,9 +21,28 @@ app-sidebar {
   background-color: #f8fafc;
 }
 
-/* Main content */
 .app-shell__main {
   flex: 1;
   padding: 24px;
   overflow: auto;
+}
+
+@media (max-width: 768px) {
+  app-sidebar {
+    width: auto;
+  }
+
+  .app-shell {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .app-shell__content {
+    width: 100%;
+  }
+
+  .app-shell__main {
+    padding: 16px;
+  }
 }

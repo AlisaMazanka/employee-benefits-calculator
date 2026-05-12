@@ -57,3 +57,12 @@
     font-weight: 400;
     color: #111827;
 }
+
+@media (max-width: 768px) {
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+    .summary-panel {
+        padding: 16px;
+    }
+}

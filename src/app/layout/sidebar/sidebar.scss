@@ -22,14 +22,32 @@
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* hover */
 .sidebar-nav a:hover {
   background-color: #334155;
 }
 
-/* active link */
 .sidebar-nav a.active {
   background-color: #3b82f6;
   color: #ffffff;
   font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    height: auto;
+    padding: 12px;
+  }
+
+  .sidebar nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+  }
+
+  .sidebar a {
+    white-space: nowrap;
+    padding: 10px 12px;
+  }
 }

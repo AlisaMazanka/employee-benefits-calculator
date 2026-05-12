@@ -129,3 +129,18 @@ button:disabled {
 .form-actions button:hover {
   background: #059669;
 }
+
+@media (max-width: 768px) {
+  .service-row {
+    padding: 16px;
+    overflow: hidden;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid label {
+    min-width: 0;
+  }
+}

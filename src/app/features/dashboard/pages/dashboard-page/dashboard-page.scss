@@ -83,3 +83,18 @@
 .dashboard-section li + li {
   margin-top: 8px;
 }
+
+@media (max-width: 768px) {
+  .dashboard-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .primary-link {
+    width: stretch;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+}

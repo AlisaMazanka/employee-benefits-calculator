@@ -69,3 +69,14 @@
   background: #fee2e2;
   color: #991b1b;
 }
+
+@media (max-width: 768px) {
+  .activity-log {
+    padding: 16px;
+  }
+
+  .activity-log__item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

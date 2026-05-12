@@ -16,6 +16,7 @@ Employee Benefits Calculator allows users to:
 * calculate benefit eligibility
 * estimate annual benefit amount
 * save calculation data through a mocked API flow
+* Responsive UI optimized for desktop and mobile screens
 
 The business domain is fictional and does not contain any proprietary logic or real client data.
 
@@ -167,24 +168,24 @@ Features
 
 ⸻
 
-# Testing
+Testing
 
 The project includes focused unit tests for the core logic layer.
 
 Current test coverage includes:
 
-- `BenefitsCalculationService`
+* `BenefitsCalculationService`
   - total service years calculation
   - eligibility rules
   - estimated annual benefit calculation
   - empty service history edge case
 
-- Service history validators
+* Service history validators
   - valid date ranges
   - invalid date ranges
   - current service period handling
 
-- Benefits mapper
+* Benefits mapper
   - DTO → FormModel mapping
   - FormModel → DTO mapping
   - default values for nullable compensation fields
